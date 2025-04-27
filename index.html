@@ -5,34 +5,69 @@
   <title>Membership Registration</title>
   <style>
     body {
+      background-color: #f2e6d8;
       font-family: Arial, sans-serif;
       padding: 20px;
-      max-width: 600px;
+      max-width: 700px;
       margin: auto;
+      color: #004225;
     }
-    input, label, button {
+    h1 {
+      text-align: center;
+      color: #004225;
+    }
+    form {
+      background: white;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0px 0px 10px rgba(0, 66, 37, 0.2);
+    }
+    label {
       display: block;
+      margin-top: 15px;
+      font-weight: bold;
+    }
+    input, select, textarea, button {
       width: 100%;
-      margin-bottom: 15px;
+      padding: 10px;
+      margin-top: 5px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      font-size: 16px;
     }
     button {
-      background-color: #4CAF50;
+      background-color: #004225;
       color: white;
-      padding: 10px;
-      font-size: 16px;
       border: none;
+      margin-top: 20px;
       cursor: pointer;
     }
     button:hover {
-      background-color: #45a049;
+      background-color: #ffc300;
+      color: #004225;
+    }
+    .hidden {
+      display: none;
     }
   </style>
+  <script>
+    function toggleDOBField() {
+      const membership = document.getElementById('membership_type').value;
+      const dobField = document.getElementById('dob_field');
+      if (membership === 'Student ($50 Annual)') {
+        dobField.classList.remove('hidden');
+      } else {
+        dobField.classList.add('hidden');
+      }
+    }
+  </script>
 </head>
 <body>
 
-  <h1>Membership Registration</h1>
+  <h1>Marshall County Ikes Membership Registration</h1>
 
   <form action="https://formspree.io/f/xblolybd" method="POST">
+
     <label for="full_name">Full Name:</label>
     <input type="text" id="full_name" name="full_name" required>
 
@@ -53,6 +88,25 @@
 
     <label for="email">Email Address:</label>
     <input type="email" id="email" name="email" required>
+
+    <label for="membership_type">Membership Type:</label>
+    <select id="membership_type" name="membership_type" onchange="toggleDOBField()" required>
+      <option value="">Select a Membership Type</option>
+      <option value="Regular ($110 Annual)">Regular ($110 Annual)</option>
+      <option value="Family ($135 Annual)">Family ($135 Annual)</option>
+      <option value="Student ($50 Annual)">Student ($50 Annual)</option>
+    </select>
+
+    <div id="dob_field" class="hidden">
+      <label for="dob">Date of Birth (for Student Memberships):</label>
+      <input type="date" id="dob" name="dob">
+    </div>
+
+    <label for="volunteer">Volunteer Interests (Optional):</label>
+    <textarea id="volunteer" name="volunteer" placeholder="Let us know how you'd like to help!"></textarea>
+
+    <label for="hear_about">How did you hear about us?</label>
+    <input type="text" id="hear_about" name="hear_about">
 
     <label for="signature">Signature (Type Your Name):</label>
     <input type="text" id="signature" name="signature" required>
